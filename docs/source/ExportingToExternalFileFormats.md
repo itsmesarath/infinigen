@@ -30,6 +30,17 @@ If you want a different output format, please use the "--help" flag or use one o
 - `--omniverse` will prepare the scene for import to IsaacSim or other NVIDIA Omniverse programs. See more in [Exporting to Simulators](./ExportingToSimulators.md).
 
 
+## Exporting a full scene to Unreal Engine
+
+`infinigen.tools.export` writes one realized mesh per copy, which is the wrong shape for a forest. For Unreal Engine 5.8, use the instanced exporter instead. It writes each unique mesh once, a 16-bit Landscape heightmap, camera and sun data, and a JSON manifest of every instance in Unreal coordinates. The matching editor script rebuilds the level for Sequencer and Movie Render Queue.
+
+Install and the Windows (WSL to Unreal) path hand-off are in `src/infinigen/tools/unreal_export/README.md`. From a machine that can import `bpy`:
+
+```bash
+python -m infinigen.tools.unreal_export --blend outputs/scene.blend --output outputs/unreal --format fbx --heightmap-resolution 505
+```
+
+
 ## :warning: Exporting full Infinigen scenes is only supported for USDC files.
 
 
